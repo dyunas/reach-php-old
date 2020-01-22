@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +25,7 @@ Route::middleware('auth:api')->get('/customer/{customer}', 'CustomerController@s
 Route::middleware('auth:api')->post('/logout', 'Auth\LoginController@logout');
 
 Route::post('/login', 'Auth\LoginController@login');
+
+Route::middleware('auth:api')->get('/getAuthenticatedUser', function () {
+  return Auth::user()->account_type;
+});
